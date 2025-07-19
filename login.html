@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - موقع الإعلانات المبوبة</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form">
+            <h2 id="form-title">تسجيل الدخول</h2>
+            
+            <!-- نموذج تسجيل الدخول -->
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn-primary">تسجيل الدخول</button>
+            </form>
+
+            <!-- نموذج إنشاء حساب -->
+            <form id="register-form" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="register-name" placeholder="الاسم الكامل" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="register-phone" placeholder="رقم الهاتف" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="register-email" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-password" placeholder="كلمة المرور" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-confirm-password" placeholder="تأكيد كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn-primary">إنشاء حساب</button>
+            </form>
+
+            <div class="auth-switch">
+                <p id="switch-text">ليس لديك حساب؟ <a href="#" id="switch-link">إنشاء حساب جديد</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
+
