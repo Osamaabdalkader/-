@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الإعلانات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #06d6a0;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            padding-bottom: 70px;
+        }
+
+        /* تصميم الهيدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 20px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 30px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* تصميم الصفحة الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 25px 0 15px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .category {
+            min-width: 120px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .category h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+            height: 44px;
+            overflow: hidden;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .product-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .product-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-time {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* شريط التنقل السفلي */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--gray);
+            font-size: 0.8rem;
+            transition: var(--transition);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 1.3rem;
+            margin-bottom: 3px;
+        }
+
+        .nav-item.add-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -25px;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .nav-item.add-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* نماذج تسجيل الدخول وإنشاء حساب */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .auth-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .auth-overlay.active .auth-container {
+            transform: translateY(0);
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .auth-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .auth-header p {
+            opacity: 0.9;
+        }
+
+        .auth-form {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark), #64199f);
+            transform: translateY(-2px);
+        }
+
+        .auth-footer {
+            text-align: center;
+            padding: 15px 0 5px;
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .close-auth {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-auth:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* صفحة إنشاء إعلان */
+        .create-ad-container {
+            background: white;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.03);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .image-preview {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .preview-item {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--accent);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* صفحة تفاصيل الإعلان */
+        .ad-detail-container {
+            background: white;
+            border-radius: 20px;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .ad-image {
+            height: 350px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .ad-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ad-content {
+            padding: 25px;
+        }
+
+        .ad-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .ad-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .ad-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+        }
+
+        .ad-description {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* صفحة الطلب */
+        .order-container {
+            background: white;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+        }
+
+        .bank-info {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .bank-info h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .bank-details {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .bank-note {
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .form-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .success-message i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* صفحة الحساب */
+        .account-container {
+            background: white;
+            border-radius: 20px;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .account-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 25px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 15px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--gray);
+        }
+
+        .user-name {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .account-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .account-content {
+            padding: 25px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .logout-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 30px auto 0;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        /* التكيف مع الأجهزة المحمولة */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .header-actions {
+                order: 2;
+            }
+            
+            .search-bar {
+                order: 3;
+                max-width: 100%;
+                margin: 15px 0 0;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .nav-item span {
+                display: none;
+            }
+            
+            .nav-item {
+                padding: 8px;
+            }
+            
+            .nav-item.add-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-bullhorn"></i>
+                <span>منصة الإعلانات</span>
+            </div>
+            
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="ابحث عن منتج أو خدمة...">
+            </div>
+            
+            <div class="header-actions">
+                <button class="action-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button class="action-btn" id="account-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <!-- الأقسام -->
+        <div class="categories">
+            <div class="category">
+                <i class="fas fa-car"></i>
+                <h3>سيارات</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-home"></i>
+                <h3>عقارات</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>جوالات</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-laptop"></i>
+                <h3>إلكترونيات</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-tshirt"></i>
+                <h3>ملابس</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-couch"></i>
+                <h3>أثاث</h3>
+            </div>
+        </div>
+        
+        <!-- المنتجات -->
+        <h2 class="section-title">أحدث الإعلانات</h2>
+        <div class="products-grid">
+            <!-- سيتم إضافة الإعلانات هنا ديناميكيًا -->
+        </div>
+    </div>
+    
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bell"></i>
+            <span>الإشعارات</span>
+        </a>
+        <a href="#" class="nav-item add-btn" id="add-ad-btn">
+            <i class="fas fa-plus"></i>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-headset"></i>
+            <span>الدعم</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>المزيد</span>
+        </a>
+    </div>
+    
+    <!-- نافذة تسجيل الدخول -->
+    <div class="auth-overlay" id="login-overlay">
+        <div class="auth-container">
+            <div class="close-auth">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="auth-header">
+                <h2>مرحباً بعودتك!</h2>
+                <p>سجل الدخول للوصول إلى حسابك</p>
+            </div>
+            <div class="auth-form">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" class="form-control" placeholder="ادخل بريدك الإلكتروني">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" class="form-control" placeholder="ادخل كلمة المرور">
+                </div>
+                <button class="btn btn-primary">تسجيل الدخول</button>
+                <div class="auth-footer">
+                    <p>ليس لديك حساب؟ <a href="#" id="show-signup">إنشاء حساب جديد</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة إنشاء حساب -->
+    <div class="auth-overlay" id="signup-overlay">
+        <div class="auth-container">
+            <div class="close-auth">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="auth-header">
+                <h2>انضم إلينا!</h2>
+                <p>أنشئ حسابك الجديد في خطوات بسيطة</p>
+            </div>
+            <div class="auth-form">
+                <div class="form-group">
+                    <label for="fullname">الاسم الكامل</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="ادخل اسمك الكامل">
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="ادخل رقم هاتفك">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">البريد الإلكتروني</label>
+                    <input type="email" id="signup-email" class="form-control" placeholder="ادخل بريدك الإلكتروني">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">كلمة المرور</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="اختر كلمة مرور قوية">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="أعد إدخال كلمة المرور">
+                </div>
+                <button class="btn btn-primary">إنشاء حساب</button>
+                <div class="auth-footer">
+                    <p>لديك حساب بالفعل؟ <a href="#" id="show-login">تسجيل الدخول</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة إنشاء إعلان -->
+    <div class="container" id="create-ad-page" style="display: none;">
+        <div class="create-ad-container">
+            <h2 class="section-title">إنشاء إعلان جديد</h2>
+            
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>انقر لرفع الصور</h3>
+                <p>أو اسحب وأسقط الصور هنا</p>
+                <input type="file" id="image-upload" multiple style="display: none;">
+                
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-title">عنوان الإعلان</label>
+                <input type="text" id="ad-title" class="form-control" placeholder="أدخل عنواناً واضحاً وجذاباً">
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-category">الفئة</label>
+                <select id="ad-category" class="form-control">
+                    <option value="">اختر الفئة</option>
+                    <option value="cars">سيارات</option>
+                    <option value="realestate">عقارات</option>
+                    <option value="electronics">إلكترونيات</option>
+                    <option value="furniture">أثاث</option>
+                    <option value="clothing">ملابس</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-price">السعر (ريال سعودي)</label>
+                <input type="number" id="ad-price" class="form-control" placeholder="أدخل السعر">
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-location">الموقع</label>
+                <input type="text" id="ad-location" class="form-control" placeholder="أدخل موقعك">
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-description">وصف الإعلان</label>
+                <textarea id="ad-description" class="form-control" rows="5" placeholder="صف منتجك بالتفصيل..."></textarea>
+            </div>
+            
+            <button class="btn btn-primary">نشر الإعلان الآن</button>
+        </div>
+    </div>
+    
+    <!-- صفحة تفاصيل الإعلان -->
+    <div class="container" id="ad-detail-page" style="display: none;">
+        <div class="ad-detail-container">
+            <div class="ad-image">
+                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Product">
+            </div>
+            
+            <div class="ad-content">
+                <h1 class="ad-title">كاميرا احترافية كانون EOS R6 مع عدسة 24-105mm</h1>
+                <div class="ad-price">4,200 ر.س</div>
+                
+                <div class="ad-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>الرياض، حي الملقا</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>منذ 3 ساعات</span>
+                    </div>
+                </div>
+                
+                <div class="ad-description">
+                    <p>كاميرا كانون EOS R6 بحالة ممتازة، الاستخدام خفيف جداً. الكاميرا تعمل بشكل ممتاز بدون أي مشاكل.</p>
+                    <p>المواصفات:</p>
+                    <ul>
+                        <li>حساس 20.1 ميجابكسل</li>
+                        <li>تصوير فيديو 4K بجودة عالية</li>
+                        <li>مثبت صورة مدمج 8 محاور</li>
+                        <li>شاشة LCD قابلة للحركة واللمس</li>
+                        <li>سرعة تصوير تصل إلى 20 لقطة/ثانية</li>
+                    </ul>
+                    <p>السعر نهائي ويمنع المزايدة. التواصل عبر الرسائل فقط.</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary">طلب الآن</button>
+                    <button class="btn btn-outline">تواصل مع البائع</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة الطلب -->
+    <div class="container" id="order-page" style="display: none;">
+        <div class="order-container">
+            <h2 class="section-title">طلب المنتج</h2>
+            
+            <div class="bank-info">
+                <h3>الدفع عبر التحويل البنكي</h3>
+                <div class="bank-details">
+                    <div class="detail-item">
+                        <span>اسم البنك:</span>
+                        <span>البنك الكريمي</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>رقم الحساب:</span>
+                        <span>SA12345678901234567890</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>اسم المستفيد:</span>
+                        <span>شركة منصة الإعلانات</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>المبلغ:</span>
+                        <span>4,200 ر.س</span>
+                    </div>
+                </div>
+                <p class="bank-note">يرجى إرفاق إيصال التحويل بعد إتمام الدفع</p>
+            </div>
+            
+            <div class="form-title">معلومات الطلب</div>
+            
+            <div class="form-group">
+                <label for="order-name">الاسم الكامل</label>
+                <input type="text" id="order-name" class="form-control" placeholder="ادخل اسمك الكامل">
+            </div>
+            
+            <div class="form-group">
+                <label for="order-phone">رقم الجوال</label>
+                <input type="tel" id="order-phone" class="form-control" placeholder="ادخل رقم جوالك">
+            </div>
+            
+            <div class="form-group">
+                <label for="order-address">عنوان التوصيل</label>
+                <textarea id="order-address" class="form-control" rows="3" placeholder="ادخل عنوان التوصيل الكامل"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="receipt">إرفاق إيصال التحويل</label>
+                <input type="file" id="receipt" class="form-control">
+            </div>
+            
+            <button class="btn btn-primary">تأكيد الطلب</button>
+            
+            <div class="success-message" id="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h3>تم تأكيد طلبك بنجاح!</h3>
+                <p>سيتم التواصل معك خلال 24 ساعة لتأكيد التفاصيل</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة الحساب -->
+    <div class="container" id="account-page" style="display: none;">
+        <div class="account-container">
+            <div class="account-header">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 class="user-name">أحمد محمد</h2>
+                <p class="user-email">ahmed@example.com</p>
+                
+                <div class="account-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">إعلانات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">طلبات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.8</div>
+                        <div class="stat-label">تقييم</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="account-content">
+                <div class="section">
+                    <h3 class="section-title"><i class="fas fa-info-circle"></i> معلومات الحساب</h3>
+                    
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">رقم الجوال</span>
+                            <span>+966500123456</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">تاريخ التسجيل</span>
+                            <span>15 مارس 2023</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">حالة الحساب</span>
+                            <span style="color: var(--success);">مفعل</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="section-title"><i class="fas fa-lock"></i> الأمان</h3>
+                    
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">البريد الإلكتروني</span>
+                            <span>ahmed@example.com</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">كلمة المرور</span>
+                            <span>**********</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">رقم الهاتف</span>
+                            <span>+966500123456</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- تهيئة Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    
+    <script>
+        // تهيئة Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAzYZMxqNmnLMGYnCyiJYPg2MbxZMt0co0",
+            authDomain: "osama-91b95.firebaseapp.com",
+            databaseURL: "https://osama-91b95-default-rtdb.firebaseio.com",
+            projectId: "osama-91b95",
+            storageBucket: "osama-91b95.appspot.com",
+            messagingSenderId: "118875905722",
+            appId: "1:118875905722:web:200bff1bd99db2c1caac83",
+            measurementId: "G-LEM5PVPJZC"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // بيانات الإعلانات
+        const ads = [
+            {
+                id: 1,
+                title: "آيفون 13 برو ماكس - 256 جيجا",
+                price: 4200,
+                location: "جدة، حي الصفا",
+                time: "منذ ساعتين",
+                image: "https://images.unsplash.com/photo-1633893670688-1c0f0c5cff19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                category: "جوالات"
+            },
+            {
+                id: 2,
+                title: "ماك بوك برو 2022 - شاشة 14 بوصة",
+                price: 7500,
+                location: "الرياض، حي النخيل",
+                time: "منذ 5 ساعات",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+                category: "إلكترونيات"
+            },
+            {
+                id: 3,
+                title: "تلفزيون سامسونج 75 بوصة - 4K الذكي",
+                price: 5500,
+                location: "الدمام، حي المريكبات",
+                time: "منذ يوم",
+                image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1475&q=80",
+                category: "إلكترونيات"
+            },
+            {
+                id: 4,
+                title: "كنبة فخمة 3 مقاعد - جلد طبيعي",
+                price: 2200,
+                location: "مكة، حي العزيزية",
+                time: "منذ 3 أيام",
+                image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                category: "أثاث"
+            },
+            {
+                id: 5,
+                title: "كاميرا احترافية كانون EOS R6",
+                price: 6800,
+                location: "الرياض، حي الملقا",
+                time: "منذ 4 ساعات",
+                image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                category: "إلكترونيات"
+            },
+            {
+                id: 6,
+                title: "عطر شانيل بلو - 100 مل",
+                price: 450,
+                location: "الخبر، حي الراكة",
+                time: "منذ 6 ساعات",
+                image: "https://images.unsplash.com/photo-1592945403247-b9c5dcffb1e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                category: "عطور"
+            }
+        ];
+
+        // عرض الإعلانات
+        function displayAds() {
+            const productsGrid = document.querySelector('.products-grid');
+            productsGrid.innerHTML = '';
+            
+            ads.forEach(ad => {
+                const adCard = document.createElement('div');
+                adCard.className = 'product-card';
+                adCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${ad.image}" alt="${ad.title}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${ad.title}</h3>
+                        <div class="product-meta">
+                            <div class="product-price">${ad.price} ر.س</div>
+                            <div class="product-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${ad.location}
+                            </div>
+                        </div>
+                        <div class="product-time">
+                            <i class="far fa-clock"></i>
+                            ${ad.time}
+                        </div>
+                    </div>
+                `;
+                
+                adCard.addEventListener('click', () => {
+                    document.querySelector('.container').style.display = 'none';
+                    document.getElementById('ad-detail-page').style.display = 'block';
+                });
+                
+                productsGrid.appendChild(adCard);
+            });
+        }
+        
+        // تهيئة معاينة الصور
+        function initImagePreview() {
+            const uploadArea = document.getElementById('upload-area');
+            const imageUpload = document.getElementById('image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            
+            uploadArea.addEventListener('click', () => {
+                imageUpload.click();
+            });
+            
+            imageUpload.addEventListener('change', function() {
+                const files = this.files;
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const previewItem = document.createElement('div');
+                        previewItem.className = 'preview-item';
+                        previewItem.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <div class="remove-image">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        `;
+                        
+                        previewItem.querySelector('.remove-image').addEventListener('click', function() {
+                            previewItem.remove();
+                        });
+                        
+                        imagePreview.appendChild(previewItem);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        // تهيئة التنقل بين الصفحات
+        function initNavigation() {
+            // زر الحساب
+            document.getElementById('account-btn').addEventListener('click', function() {
+                document.getElementById('login-overlay').classList.add('active');
+            });
+            
+            // زر إضافة إعلان
+            document.getElementById('add-ad-btn').addEventListener('click', function() {
+                document.querySelector('.container').style.display = 'none';
+                document.getElementById('create-ad-page').style.display = 'block';
+            });
+            
+            // زر الطلب في صفحة التفاصيل
+            document.querySelector('.btn-primary').addEventListener('click', function() {
+                document.getElementById('ad-detail-page').style.display = 'none';
+                document.getElementById('order-page').style.display = 'block';
+            });
+            
+            // تأكيد الطلب
+            document.querySelector('.order-container .btn-primary').addEventListener('click', function() {
+                document.getElementById('success-message').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('order-page').style.display = 'none';
+                    document.querySelector('.container').style.display = 'block';
+                }, 3000);
+            });
+            
+            // إغلاق نافذة المصادقة
+            document.querySelectorAll('.close-auth').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.auth-overlay').forEach(overlay => {
+                        overlay.classList.remove('active');
+                    });
+                });
+            });
+            
+            // التبديل بين تسجيل الدخول وإنشاء حساب
+            document.getElementById('show-signup').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('login-overlay').classList.remove('active');
+                document.getElementById('signup-overlay').classList.add('active');
+            });
+            
+            document.getElementById('show-login').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('signup-overlay').classList.remove('active');
+                document.getElementById('login-overlay').classList.add('active');
+            });
+            
+            // العودة إلى الصفحة الرئيسية
+            document.querySelector('.logo').addEventListener('click', function() {
+                document.querySelector('.container').style.display = 'block';
+                document.getElementById('create-ad-page').style.display = 'none';
+                document.getElementById('ad-detail-page').style.display = 'none';
+                document.getElementById('order-page').style.display = 'none';
+                document.getElementById('account-page').style.display = 'none';
+            });
+        }
+        
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', function() {
+            displayAds();
+            initImagePreview();
+            initNavigation();
+            
+            // إخفاء الصفحات الأخرى عند التحميل
+            document.getElementById('create-ad-page').style.display = 'none';
+            document.getElementById('ad-detail-page').style.display = 'none';
+            document.getElementById('order-page').style.display = 'none';
+            document.getElementById('account-page').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
